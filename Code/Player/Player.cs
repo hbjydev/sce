@@ -19,6 +19,11 @@ public partial class Player : Component
 	protected override void OnStart()
 	{
 		OnMovementStart();
+
+		if (Components.TryGet<SkinnedModelRenderer>(out var model)) {
+			var clothing = ClothingContainer.CreateFromLocalUser();
+			clothing.Apply(model);
+		}
 	}
 
 	protected override void OnEnabled()
