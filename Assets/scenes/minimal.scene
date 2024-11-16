@@ -98,9 +98,18 @@
           }
         },
         {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "d9c42ec3-86e6-4c84-94ad-2203fd3b0067",
+          "AutoScreenScale": false,
+          "Opacity": 1,
+          "Scale": 1,
+          "ScaleStrategy": "ConsistentHeight",
+          "ZIndex": 100
+        },
+        {
           "__type": "SCE.Player.Player",
           "__guid": "3e6df2ca-8b41-410b-8d93-cf2c071c7000",
-          "isWalking": false,
+          "Alive": true,
           "AnimationHelper": {
             "_type": "component",
             "component_id": "ea05319c-a1cc-4a8a-957c-1aa6da024a6e",
@@ -117,12 +126,21 @@
             "go": "112b6221-1d14-47e6-bf5c-ff8793b6b995",
             "component_type": "CharacterController"
           },
+          "CurrentHealth": 0,
           "EyePosition": "0,0,62.2",
           "JumpAction": "Jump",
           "JumpStrength": 250,
+          "MaxHealth": 100,
           "RunSpeed": 140,
+          "ScreenPanel": {
+            "_type": "component",
+            "component_id": "d9c42ec3-86e6-4c84-94ad-2203fd3b0067",
+            "go": "112b6221-1d14-47e6-bf5c-ff8793b6b995",
+            "component_type": "ScreenPanel"
+          },
           "SprintAction": "run",
           "SprintSpeed": 250,
+          "StartHealth": 100,
           "ToggleWalkAction": "Walk",
           "WalkSpeed": 70
         }

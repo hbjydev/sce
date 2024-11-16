@@ -1,0 +1,17 @@
+@namespace SCE.HUD
+@using SCE.HUD.Components
+@inherits PanelComponent
+
+@if (!DrawHud)
+    return;
+
+<root>
+    <UnitInfo />
+</root>
+
+@code {
+    [ConVar("sce_drawhud")]
+    public static bool DrawHud { get; set; } = true;
+
+    protected override int BuildHash() => HashCode.Combine(DrawHud);
+}

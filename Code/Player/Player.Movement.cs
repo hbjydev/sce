@@ -56,7 +56,6 @@ public partial class Player
     [Category("Keybinds")]
     [InputAction]
     public string ToggleWalkAction { get; set; } = "walk";
-
     bool isWalking = false;
 
     /// <summary>
@@ -74,6 +73,15 @@ public partial class Player
     [Category("Keybinds")]
     [InputAction]
     public string JumpAction { get; set; } = "jump";
+
+    /// <summary>
+    /// The key used to trigger a crouch
+    /// </summary>
+    [Property]
+    [Category("Keybinds")]
+    [InputAction]
+    public string CrouchAction { get; set; } = "duck";
+    bool isCrouched = false;
 
     /// <summary>
     /// Where the camera rotates around and the aim originates from
@@ -106,8 +114,9 @@ public partial class Player
         if (Controller == null) return;
 
         if (Input.Pressed(ToggleWalkAction)) isWalking = !isWalking;
+        if (Input.Pressed(CrouchAction)) isCrouched = !isCrouched;
 
-        var wishSpeed = Input.Down(SprintAction) ? SprintSpeed : (isWalking ? WalkSpeed : RunSpeed);
+        var wishSpeed = isCrouched ? WalkSpeed : Input.Down(SprintAction) ? SprintSpeed : (isWalking ? WalkSpeed : RunSpeed);
         var wishVelocity = Input.AnalogMove.Normal * wishSpeed * WorldRotation;
         Controller.Accelerate(wishVelocity);
 
@@ -117,10 +126,10 @@ public partial class Player
 
             if (Input.Pressed(JumpAction)) {
                 Controller.Punch(Vector3.Up * JumpStrength);
-
-                if (AnimationHelper != null)
-                    AnimationHelper.TriggerJump();
+                AnimationHelper?.TriggerJump();
             }
+
+            AnimationHelper.DuckLevel = isCrouched ? 1 : 0;
         } else {
             Controller.Acceleration = 5f;
             Controller.Velocity += Scene.PhysicsWorld.Gravity * Time.Delta;

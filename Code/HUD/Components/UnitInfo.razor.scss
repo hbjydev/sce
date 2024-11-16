@@ -1,0 +1,11 @@
+@import 'Styles/Theme.scss';
+
+UnitInfo {
+    display: flex;
+    column-gap: $gap;
+    position: absolute;
+    top: $safe-zone-y;
+    right: $safe-zone-y;
+    color: white;
+    text-shadow: 1px 1px black;
+}

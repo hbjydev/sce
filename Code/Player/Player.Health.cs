@@ -21,7 +21,7 @@ public partial class Player {
 
     [Property]
     [Category("Vitals")]
-    public bool Alive => CurrentHealth <= 0;
+    public bool Alive => CurrentHealth >= 0;
 
     private void OnHealthStart()
     {

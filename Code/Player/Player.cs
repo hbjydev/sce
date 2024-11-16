@@ -19,6 +19,7 @@ public partial class Player : Component
 	protected override void OnStart()
 	{
 		OnHealthStart();
+		OnUIStart();
 		OnMovementStart();
 
 		if (Components.TryGet<SkinnedModelRenderer>(out var model)) {

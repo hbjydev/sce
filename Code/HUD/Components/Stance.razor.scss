@@ -1,0 +1,11 @@
+@import 'Styles/Theme.scss';
+
+Stance {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient($bg, rgba(0, 0, 0, 0));
+    height: 90px;
+    width: 90px;
+    justify-content: center;
+    align-items: center;
+}
