@@ -23,7 +23,7 @@ public partial class Player
     [Property]
     [Range(0f, 400f, 1f)]
     [Category("Movement")]
-    public float WalkSpeed { get; set; } = 120f;
+    public float WalkSpeed { get; set; } = 70f;
 
     /// <summary>
     /// How fast the player can run (units/sec)
@@ -31,7 +31,15 @@ public partial class Player
     [Property]
     [Range(0f, 400f, 1f)]
     [Category("Movement")]
-    public float RunSpeed { get; set; } = 250f;
+    public float RunSpeed { get; set; } = 140f;
+
+    /// <summary>
+    /// How fast the player can sprint (units/sec)
+    /// </summary>
+    [Property]
+    [Range(0f, 400f, 1f)]
+    [Category("Movement")]
+    public float SprintSpeed { get; set; } = 250f;
 
     /// <summary>
     /// How powerfully the player can jump (units/sec)
@@ -39,15 +47,25 @@ public partial class Player
     [Property]
     [Range(0f, 1000f, 10f)]
     [Category("Movement")]
-    public float JumpStrength { get; set; } = 400f;
+    public float JumpStrength { get; set; } = 250f;
 
     /// <summary>
-    /// The key used to trigger running
+    /// The key used to toggle between walking and running
     /// </summary>
     [Property]
     [Category("Keybinds")]
     [InputAction]
-    public string RunAction { get; set; } = "run";
+    public string ToggleWalkAction { get; set; } = "walk";
+
+    bool isWalking = false;
+
+    /// <summary>
+    /// The key used to trigger sprinting
+    /// </summary>
+    [Property]
+    [Category("Keybinds")]
+    [InputAction]
+    public string SprintAction { get; set; } = "run";
 
     /// <summary>
     /// The key used to trigger a Jump
@@ -61,6 +79,7 @@ public partial class Player
     /// Where the camera rotates around and the aim originates from
     /// </summary>
     [Property]
+    [Category("Movement")]
     public Vector3 EyePosition { get; set; }
 
     public Angles EyeAngles { get; set; }
@@ -86,7 +105,9 @@ public partial class Player
 	{
         if (Controller == null) return;
 
-        var wishSpeed = Input.Down(RunAction) ? RunSpeed : WalkSpeed;
+        if (Input.Pressed(ToggleWalkAction)) isWalking = !isWalking;
+
+        var wishSpeed = Input.Down(SprintAction) ? SprintSpeed : (isWalking ? WalkSpeed : RunSpeed);
         var wishVelocity = Input.AnalogMove.Normal * wishSpeed * WorldRotation;
         Controller.Accelerate(wishVelocity);
 
