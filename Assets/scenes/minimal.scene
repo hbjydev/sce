@@ -100,6 +100,7 @@
         {
           "__type": "SCE.Player.Player",
           "__guid": "3e6df2ca-8b41-410b-8d93-cf2c071c7000",
+          "isWalking": false,
           "AnimationHelper": {
             "_type": "component",
             "component_id": "ea05319c-a1cc-4a8a-957c-1aa6da024a6e",
@@ -118,10 +119,12 @@
           },
           "EyePosition": "0,0,62.2",
           "JumpAction": "Jump",
-          "JumpStrength": 400,
-          "RunAction": "Run",
-          "RunSpeed": 250,
-          "WalkSpeed": 120
+          "JumpStrength": 250,
+          "RunSpeed": 140,
+          "SprintAction": "run",
+          "SprintSpeed": 250,
+          "ToggleWalkAction": "Walk",
+          "WalkSpeed": 70
         }
       ],
       "Children": [
